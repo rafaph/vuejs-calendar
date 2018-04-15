@@ -3,7 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const baseConfig = {
     output: {
@@ -17,8 +17,8 @@ const baseConfig = {
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        "presets": [["es2015"]],
-                        "plugins": ["transform-es2015-destructuring", "transform-runtime"]
+                        presets: [['es2015']],
+                        plugins: ['transform-es2015-destructuring', 'transform-runtime']
                     }
                 }],
                 exclude: /node_modules/
@@ -44,6 +44,13 @@ const baseConfig = {
                 options: {
                     loaders: {
                         'scss': 'vue-style-loader!css-loader!sass-loader',
+                        'js': [{
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [['es2015']],
+                                plugins: ['transform-es2015-destructuring', 'transform-runtime']
+                            }
+                        }]
                     }
                 }
             }
@@ -85,13 +92,13 @@ let targets = ['web', 'node'].map((target) => {
             ? process.env.NODE_ENV === 'development'
                 ? [
                     new webpack.HotModuleReplacementPlugin(),
-                    new ExtractTextPlugin("style.css")
+                    new ExtractTextPlugin('style.css')
                 ]
                 : [
                     new webpack.DefinePlugin({'process.env': {NODE_ENV: '"production"'}}),
                     new webpack.optimize.UglifyJsPlugin({sourceMap: true, compress: {warnings: false}}),
                     new webpack.LoaderOptionsPlugin({minimize: true}),
-                    new ExtractTextPlugin("style.css")
+                    new ExtractTextPlugin('style.css')
                 ]
             : []
         ,

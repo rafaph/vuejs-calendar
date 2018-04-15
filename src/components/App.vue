@@ -1,28 +1,30 @@
 <template>
-    <div>
-        <div id="header">
-            <div>
-                <h1>Vue.js Calendar</h1>
+    <div id="app">
+        <div>
+            <div id="header">
+                <div>
+                    <h1>Vue.js Calendar</h1>
+                </div>
+                <div>
+                    <current-month/>
+                </div>
             </div>
-            <div>
-                <current-month/>
+            <div id="day-bar">
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+                <div>Sun</div>
             </div>
-        </div>
-        <div id="day-bar">
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-            <div>Sun</div>
-        </div>
-        <div id="calendar">
-            <div v-for="(week, i) in weeks" :key="i" class="calendar-week">
-                <calendar-day v-for="(day, j) in week" :key="j" :day="day"/>
+            <div id="calendar">
+                <div v-for="(week, i) in weeks" :key="i" class="calendar-week">
+                    <calendar-day v-for="(day, j) in week" :key="j" :day="day"/>
+                </div>
             </div>
+            <event-form/>
         </div>
-        <event-form/>
     </div>
 </template>
 
@@ -30,7 +32,7 @@
     import CalendarDay from './CalendarDay.vue';
     import CurrentMonth from './CurrentMonth.vue';
     import EventForm from './EventForm.vue';
-    
+
     export default {
         components: {
             CalendarDay,
